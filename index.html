@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVEEN.</title>
+
+<!-- SEO -->
+<meta name="description" content="I enjoy being me, and building things that matter.">
+<meta name="author" content="Musabbir Chowdhury">
+<link rel="canonical" href="https://sveeen.com/">
+
+<!-- Open Graph / Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sveeen.com/">
+<meta property="og:title" content="SVEEN.">
+<meta property="og:description" content="I enjoy being me, and building things that matter.">
+<meta property="og:site_name" content="SVEEN.">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVEEN.">
+<meta name="twitter:description" content="I enjoy being me, and building things that matter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f5f4f0;
+  --text: #1a1a1a;
+  --muted: #888;
+  --red: #8b1a1a;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+a, button { cursor: none; }
+
+::selection {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ── Page ── */
+.page {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: url('bg-portrait.avif') center center / 60% no-repeat;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 244, 240, 0.75);
+  z-index: 0;
+}
+
+/* ── Nav ── */
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-logo {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-bubble {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.25rem 0.45rem;
+  border-radius: 3px;
+  transition: color 0.12s ease, background 0.12s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: var(--muted); }
+
+.nav-links a:active,
+.nav-links a.active {
+  color: #fff;
+  background: var(--red);
+}
+
+/* ── Keyboard hint badges ── */
+.key-hints {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.key-badge {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.key-badge.pressed {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+/* ── Center content ── */
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.hero-sub {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.float-word {
+  position: absolute;
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  opacity: 0.45;
+  pointer-events: auto;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+  will-change: transform;
+}
+
+/* ── Bottom bar ── */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.bottom-bar a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.bottom-bar a:hover { color: var(--text); }
+
+/* ── Cursor dot ── */
+.cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  will-change: left, top;
+}
+
+/* ── Centerpiece bubble ── */
+.bubble-element {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Clone trail ── */
+.clone {
+  position: fixed;
+  pointer-events: none;
+  z-index: 4;
+  animation: scaleDown 1s forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes scaleDown {
+  to {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ── Entrance ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title { opacity: 0; animation: fadeIn 0.8s ease 0.2s forwards; }
+.hero-sub { opacity: 0; animation: fadeIn 0.8s ease 0.5s forwards; }
+.nav, .bottom-bar, .key-hints { opacity: 0; animation: fadeIn 0.6s ease 0.8s forwards; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  html, body, a, button { cursor: auto; }
+  .cursor-dot, .clone { display: none; }
+  .key-hints { display: none; }
+
+  /* Nav */
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav-links a { font-size: 0.58rem; letter-spacing: 0.12em; }
+  .bottom-bar { padding: 1.2rem 1.5rem; font-size: 0.52rem; }
+
+  /* Background photo fills the screen */
+  .page {
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* Hero */
+  .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+
+  /* Floating words — stack them bottom-center */
+  .word {
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.8;
+    pointer-events: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">SVEEN</a>
+      <div class="nav-bubble" id="navBubble"></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="sveen-work.html">WORK</a></li>
+      <li><a href="sveen-beliefs.html">BELIEFS</a></li>
+      <li><a href="sveen-connect.html">CONNECT</a></li>
+    </ul>
+  </nav>
+
+  <!-- Floating words layer (full page) -->
+  <div class="hero-sub" id="floatingWords"></div>
+
+  <!-- Center -->
+  <div class="center">
+    <h1 class="hero-title">SVEEN.</h1>
+  </div>
+
+  <!-- Bottom left -->
+  <div class="bottom-bar">
+    <span>&copy; 2026</span>
+
+  </div>
+
+  <!-- Key hints bottom right -->
+  <div class="key-hints">
+    <div class="key-badge" id="keyB">B</div>
+    <div class="key-badge" id="keyR">R</div>
+  </div>
+
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<script>
+function makeBubbleSVG(size) {
+  const s = size;
+  const h = s / 2;
+
+  function wobblyCircle(cx, cy, r, seed) {
+    const points = 12;
+    let d = '';
+    for (let i = 0; i <= points; i++) {
+      const angle = (i / points) * Math.PI * 2;
+      const wobble = 1 + Math.sin(angle * 3 + seed) * 0.04 + Math.cos(angle * 5 + seed * 2) * 0.03;
+      const px = cx + Math.cos(angle) * r * wobble;
+      const py = cy + Math.sin(angle) * r * wobble;
+      if (i === 0) {
+        d += `M ${px.toFixed(1)} ${py.toFixed(1)} `;
+      } else {
+        const prevAngle = ((i - 0.5) / points) * Math.PI * 2;
+        const cpWobble = 1 + Math.sin(prevAngle * 4 + seed) * 0.05;
+        const cpx = cx + Math.cos(prevAngle) * r * 1.02 * cpWobble;
+        const cpy = cy + Math.sin(prevAngle) * r * 1.02 * cpWobble;
+        d += `Q ${cpx.toFixed(1)} ${cpy.toFixed(1)}, ${px.toFixed(1)} ${py.toFixed(1)} `;
+      }
+    }
+    d += 'Z';
+    return d;
+  }
+
+  const mainR = h * 0.85;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}" width="${s}" height="${s}">
+    <path d="${wobblyCircle(h, h, mainR, 0)}"
+      fill="none"
+      stroke="rgba(30,30,30,0.55)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path d="${wobblyCircle(h + 0.5, h + 0.3, mainR * 0.98, 2.5)}"
+      fill="none"
+      stroke="rgba(30,30,30,0.18)"
+      stroke-width="1.2"
+      stroke-linecap="round"
+    />
+    <path d="
+      M ${(h - mainR * 0.5).toFixed(1)} ${(h - mainR * 0.55).toFixed(1)}
+      Q ${(h - mainR * 0.15).toFixed(1)} ${(h - mainR * 0.85).toFixed(1)},
+        ${(h + mainR * 0.1).toFixed(1)} ${(h - mainR * 0.65).toFixed(1)}
+    "
+      fill="none"
+      stroke="rgba(30,30,30,0.4)"
+      stroke-width="2.2"
+      stroke-linecap="round"
+    />
+    <circle cx="${(h - mainR * 0.35).toFixed(1)}" cy="${(h - mainR * 0.4).toFixed(1)}" r="${(s * 0.025).toFixed(1)}"
+      fill="rgba(30,30,30,0.35)"
+    />
+    <path d="${wobblyCircle(s * 0.82, s * 0.17, s * 0.05, 4)}"
+      fill="none"
+      stroke="rgba(30,30,30,0.4)"
+      stroke-width="1.3"
+      stroke-linecap="round"
+    />
+    <path d="${wobblyCircle(s * 0.14, s * 0.8, s * 0.035, 7)}"
+      fill="none"
+      stroke="rgba(30,30,30,0.3)"
+      stroke-width="1"
+      stroke-linecap="round"
+    />
+    <path d="${wobblyCircle(s * 0.72, s * 0.1, s * 0.022, 11)}"
+      fill="none"
+      stroke="rgba(30,30,30,0.25)"
+      stroke-width="0.8"
+    />
+    <line x1="${(h + mainR*0.3).toFixed(1)}" y1="${(h + mainR*0.5).toFixed(1)}"
+          x2="${(h + mainR*0.4).toFixed(1)}" y2="${(h + mainR*0.6).toFixed(1)}"
+      stroke="rgba(30,30,30,0.12)" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="${(h + mainR*0.35).toFixed(1)}" y1="${(h + mainR*0.45).toFixed(1)}"
+          x2="${(h + mainR*0.48).toFixed(1)}" y2="${(h + mainR*0.55).toFixed(1)}"
+      stroke="rgba(30,30,30,0.1)" stroke-width="0.7" stroke-linecap="round"/>
+    <line x1="${(h + mainR*0.42).toFixed(1)}" y1="${(h + mainR*0.42).toFixed(1)}"
+          x2="${(h + mainR*0.52).toFixed(1)}" y2="${(h + mainR*0.48).toFixed(1)}"
+      stroke="rgba(30,30,30,0.08)" stroke-width="0.6" stroke-linecap="round"/>
+  </svg>`;
+}
+
+document.getElementById('navBubble').innerHTML = makeBubbleSVG(32);
+
+const centerBubble = document.createElement('div');
+centerBubble.className = 'bubble-element';
+centerBubble.innerHTML = makeBubbleSVG(280);
+centerBubble.style.width = '280px';
+centerBubble.style.height = '280px';
+centerBubble.style.left = '50%';
+centerBubble.style.top = '50%';
+centerBubble.style.transform = 'translate(-50%, -50%)';
+centerBubble.style.opacity = '0.2';
+document.querySelector('.page').appendChild(centerBubble);
+
+let angle = 0;
+let rotating = true;
+function rotateBubble() {
+  if (rotating) angle += 0.12;
+  centerBubble.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+  requestAnimationFrame(rotateBubble);
+}
+rotateBubble();
+
+const cursorDot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', (e) => {
+  cursorDot.style.left = e.clientX + 'px';
+  cursorDot.style.top = e.clientY + 'px';
+});
+
+const WORDS = ['I', 'ENJOY', 'BEING', 'ME', 'AND', 'BUILDING', 'THINGS', 'THAT', 'MATTER.'];
+const floatingContainer = document.getElementById('floatingWords');
+const PUSH_RADIUS = 180;
+const PUSH_FORCE = 12;
+const FRICTION = 0.92;
+const RETURN_FORCE = 0.008;
+
+const wordObjects = WORDS.map((word, i) => {
+  const el = document.createElement('span');
+  el.className = 'float-word';
+  el.textContent = word;
+  floatingContainer.appendChild(el);
+
+  const startX = 100;
+  const startY = 120;
+  const cols = 3;
+  const row = Math.floor(i / cols);
+  const col = i % cols;
+  const spacingX = 140;
+  const spacingY = 40;
+  const homeX = startX + col * spacingX + (Math.random() - 0.5) * 15;
+  const homeY = startY + row * spacingY + (Math.random() - 0.5) * 8;
+
+  return { el, homeX, homeY, x: homeX, y: homeY, vx: 0, vy: 0 };
+});
+
+let mouseForWords = { x: -9999, y: -9999 };
+document.addEventListener('mousemove', (e) => {
+  mouseForWords.x = e.clientX;
+  mouseForWords.y = e.clientY;
+});
+
+function updateWords() {
+  for (const w of wordObjects) {
+    const dx = w.x - mouseForWords.x;
+    const dy = w.y - mouseForWords.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < PUSH_RADIUS && dist > 0) {
+      const force = (1 - dist / PUSH_RADIUS) * PUSH_FORCE;
+      const angle = Math.atan2(dy, dx);
+      w.vx += Math.cos(angle) * force;
+      w.vy += Math.sin(angle) * force;
+    }
+    w.vx += (w.homeX - w.x) * RETURN_FORCE;
+    w.vy += (w.homeY - w.y) * RETURN_FORCE;
+    w.vx *= FRICTION;
+    w.vy *= FRICTION;
+    w.x += w.vx;
+    w.y += w.vy;
+    w.x = Math.max(20, Math.min(window.innerWidth - 80, w.x));
+    w.y = Math.max(40, Math.min(window.innerHeight - 30, w.y));
+    w.el.style.transform = `translate(${w.x}px, ${w.y}px)`;
+  }
+  requestAnimationFrame(updateWords);
+}
+updateWords();
+
+window.addEventListener('resize', () => {
+  const startX = 100, startY = 120, cols = 3, spacingX = 140, spacingY = 40;
+  wordObjects.forEach((w, i) => {
+    const row = Math.floor(i / cols);
+    const col = i % cols;
+    w.homeX = startX + col * spacingX;
+    w.homeY = startY + row * spacingY;
+  });
+});
+
+const cloneSizes = [55, 70, 85, 100, 120];
+const cloneSVGs = cloneSizes.map(size => {
+  const svg = makeBubbleSVG(size);
+  return `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}`;
+});
+
+document.addEventListener('mousemove', (e) => {
+  const clone = document.createElement('div');
+  clone.className = 'clone';
+  const idx = Math.floor(Math.random() * cloneSizes.length);
+  const size = cloneSizes[idx];
+  clone.style.left = e.clientX + 'px';
+  clone.style.top = e.clientY + 'px';
+  clone.style.width = size + 'px';
+  clone.style.height = size + 'px';
+  clone.style.transform = 'translate(-50%, -50%) scale(1)';
+  clone.style.backgroundImage = `url("${cloneSVGs[idx]}")`;
+  clone.style.backgroundSize = 'contain';
+  clone.style.backgroundRepeat = 'no-repeat';
+  clone.style.animation = 'none';
+  clone.offsetHeight;
+  clone.style.animation = 'scaleDown 1s forwards';
+  document.body.appendChild(clone);
+  setTimeout(() => clone.remove(), 2000);
+});
+
+const keyBadgeB = document.getElementById('keyB');
+const keyBadgeR = document.getElementById('keyR');
+
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+  if (key === 'b') {
+    keyBadgeB.classList.add('pressed');
+    for (let i = 0; i < 5; i++) {
+      const clone = document.createElement('div');
+      clone.className = 'clone';
+      const idx = Math.floor(Math.random() * cloneSizes.length);
+      const size = cloneSizes[idx] * 1.5;
+      clone.style.left = Math.random() * window.innerWidth + 'px';
+      clone.style.top = Math.random() * window.innerHeight + 'px';
+      clone.style.width = size + 'px';
+      clone.style.height = size + 'px';
+      clone.style.transform = 'translate(-50%, -50%) scale(1)';
+      clone.style.backgroundImage = `url("${cloneSVGs[idx]}")`;
+      clone.style.backgroundSize = 'contain';
+      clone.style.backgroundRepeat = 'no-repeat';
+      clone.style.animation = 'scaleDown 1.2s forwards';
+      document.body.appendChild(clone);
+      setTimeout(() => clone.remove(), 2500);
+    }
+  }
+  if (key === 'r') {
+    keyBadgeR.classList.add('pressed');
+    rotating = !rotating;
+  }
+});
+
+document.addEventListener('keyup', (e) => {
+  const key = e.key.toLowerCase();
+  if (key === 'b') keyBadgeB.classList.remove('pressed');
+  if (key === 'r') keyBadgeR.classList.remove('pressed');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (link.getAttribute('href') === '#') e.preventDefault();
+    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — SVEEN.</title>
+
+<!-- SEO -->
+<meta name="description" content="WLNSS, BATH, Partners, Community. The work of Musabbir Chowdhury.">
+<meta name="author" content="Musabbir Chowdhury">
+<link rel="canonical" href="https://sveeen.com/sveen-work.html">
+
+<!-- Open Graph / Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sveeen.com/sveen-work.html">
+<meta property="og:title" content="Work — SVEEN.">
+<meta property="og:description" content="WLNSS, BATH, Partners, Community. The work of Musabbir Chowdhury.">
+<meta property="og:site_name" content="SVEEN.">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Work — SVEEN.">
+<meta name="twitter:description" content="WLNSS, BATH, Partners, Community. The work of Musabbir Chowdhury.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f5f4f0;
+  --text: #1a1a1a;
+  --muted: #888;
+  --red: #8b1a1a;
+  --border: #e0dfdb;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+a, button { cursor: none; text-decoration: none; color: inherit; }
+
+::selection { background: var(--text); color: var(--bg); }
+
+/* ── Custom Cursor ── */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  will-change: left, top;
+}
+
+/* ── WORK HARD clone trail ── */
+.clone-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9000;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.5;
+  white-space: nowrap;
+  animation: cloneFade 1.2s forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes cloneFade {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(0.3); opacity: 0; }
+}
+
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+}
+
+.nav-logo {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.45rem;
+  border-radius: 3px;
+  transition: color 0.12s ease, background 0.12s ease;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: var(--muted); }
+.nav-links a.active { color: #fff; background: var(--red); }
+
+/* ── Work Wrapper ── */
+.work-wrapper {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url('bg-work.avif') center center / 85% auto no-repeat;
+  background-color: var(--bg);
+}
+
+/* ── Project Items (draggable boxes) ── */
+.project-item {
+  position: absolute;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+  user-select: none;
+  touch-action: none;
+  border-radius: 16px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.project-item.loaded {
+  opacity: 1;
+  transition: opacity 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-item.dragging {
+  z-index: 8 !important;
+  border-color: var(--text);
+}
+
+.project-item .item-number {
+  position: absolute;
+  top: 2rem; left: 2.5rem;
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 2;
+}
+
+.project-item .item-arrow {
+  position: absolute;
+  top: 2rem; right: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.35s ease, transform 0.35s ease, color 0.35s ease;
+  z-index: 2;
+}
+
+.project-item:hover .item-arrow { opacity: 1; transform: translate(0,0); color: var(--text); }
+
+.project-item .item-title {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.project-item:hover .item-title { transform: translateY(-3px); }
+
+.project-item .item-desc {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.project-item:hover .item-desc { opacity: 1; transform: translateY(0); }
+
+/* ── Floating photos in community box ── */
+.photo-track {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.photo-float {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+  opacity: 0.5;
+  filter: grayscale(20%);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+  will-change: transform;
+}
+
+.community-box:hover .photo-float { opacity: 0.75; filter: grayscale(0%); }
+
+/* ── Community Box ── */
+.community-box { background: rgba(245,244,240,0.88); }
+.community-box .item-title { text-shadow: 0 1px 8px rgba(245,244,240,0.9); }
+.community-box .item-desc  { text-shadow: 0 1px 6px rgba(245,244,240,0.9); }
+
+/* ── Case Study Overlay ── */
+.case-study-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: var(--bg);
+  z-index: 5000;
+  overflow-y: auto;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.65s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.case-study-overlay.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Community Overlay Background ── */
+#case-community {
+  background: var(--bg);
+}
+
+/* ── Back Button ── */
+.case-back {
+  position: fixed;
+  top: 1.8rem; left: 2.5rem;
+  z-index: 6000;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+  background: rgba(245,244,240,0.92);
+  padding: 0.4rem 0.6rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none;
+}
+
+.case-back:hover { color: var(--red); }
+.case-back.visible { display: flex; }
+.case-back .arrow-back { font-size: 1rem; line-height: 1; transition: transform 0.2s ease; }
+.case-back:hover .arrow-back { transform: translateX(-3px); }
+
+/* ── Case Content ── */
+.case-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 10rem 2.5rem 8rem;
+}
+
+.case-label {
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.case-title {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+.case-tagline {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5rem;
+}
+
+.case-block {
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.case-block.visible { opacity: 1; transform: translateY(0); }
+
+.case-block p {
+  font-size: clamp(0.82rem, 1.2vw, 1rem);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.case-block p + p { margin-top: 1.5rem; }
+
+.case-block .emphasis {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.case-block .emphasis-alt {
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.case-block .inline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.case-block .inline-tags span {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.case-block .lessons { margin-top: 1.5rem; }
+
+.case-block .lessons li {
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  list-style: none;
+  margin-bottom: 0.4rem;
+}
+
+.case-divider {
+  width: 40px; height: 1px;
+  background: var(--border);
+  margin: 3.5rem 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.case-divider.visible { opacity: 1; }
+
+.case-closing {
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.case-closing.visible { opacity: 1; transform: translateY(0); }
+
+.case-closing p {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.case-closing .sub {
+  font-size: 0.7rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 1rem;
+}
+
+/* ── Community Gallery ── */
+.community-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.community-gallery .gallery-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  filter: grayscale(20%);
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.4s ease, box-shadow 0.3s ease;
+}
+
+.community-gallery .gallery-img.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.community-gallery .gallery-img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  cursor: none;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: rgba(10,10,10,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lightbox.open { opacity: 1; pointer-events: auto; }
+
+.lightbox-img {
+  max-width: min(90vw, 900px);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  transform: scale(0.92);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.18s ease;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+.lightbox.open .lightbox-img { transform: scale(1); }
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: none; border: none;
+  color: rgba(255,255,255,0.7);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lightbox-close:hover { color: #fff; }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none; border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 1.5rem;
+  cursor: none;
+  padding: 1rem;
+  transition: color 0.2s ease;
+}
+
+.lightbox-nav:hover { color: #fff; }
+.lightbox-nav.prev { left: 1rem; }
+.lightbox-nav.next { right: 1rem; }
+
+.lightbox-count {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+/* ── Partnerships Box ── */
+.partnerships-box { background: rgba(245,244,240,0.88); }
+.partnerships-box .item-title { text-shadow: 0 1px 8px rgba(245,244,240,0.9); }
+.partnerships-box .item-desc  { text-shadow: 0 1px 6px rgba(245,244,240,0.9); }
+
+/* ── Floating partner name tags ── */
+.partners-track {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.partner-float {
+  position: absolute;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.35;
+  white-space: nowrap;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(26,26,26,0.18);
+  border-radius: 4px;
+  background: rgba(245,244,240,0.6);
+  will-change: transform;
+  transition: opacity 0.4s ease;
+}
+
+.partnerships-box:hover .partner-float { opacity: 0.7; }
+
+/* ── Entrance ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  html, body, a, button { cursor: auto; }
+  .cursor-dot, .clone-text, .name-bubble { display: none; }
+
+  /* Nav */
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav-links a { font-size: 0.58rem; letter-spacing: 0.12em; }
+
+  /* Stack project boxes as scrollable grid */
+  .work-wrapper {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+    padding: 5rem 1rem 5rem !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+  .project-item {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 160px !important;
+    padding: 1.5rem !important;
+    transform: none !important;
+    cursor: pointer !important;
+  }
+  .project-item .item-desc { opacity: 1 !important; transform: none !important; }
+  .project-item .item-arrow { opacity: 1 !important; transform: none !important; }
+
+  /* Case study overlays */
+  .case-study-overlay { overflow-y: auto; }
+  .case-content { padding: 5rem 1.5rem 4rem; }
+  .case-back { top: 1.2rem; left: 1.5rem; font-size: 0.6rem; }
+  .case-title { font-size: clamp(2rem, 10vw, 4rem); }
+  .emphasis { font-size: 1rem; }
+  .case-block p { font-size: 0.8rem; }
+
+  /* Gallery */
+  .community-gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.6rem; }
+
+  /* Drag hint hide */
+  #dragHint { display: none; }
+}
+
+/* ── Drag hint ── */
+#dragHint {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 10;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 1.2s forwards;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+#dragHint.gone { opacity: 0 !important; }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div id="dragHint">drag to explore</div>
+
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">SVEEN</a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">WORK</a></li>
+    <li><a href="sveen-beliefs.html">BELIEFS</a></li>
+    <li><a href="sveen-connect.html">CONNECT</a></li>
+  </ul>
+</nav>
+
+<div class="work-wrapper" id="workWrapper">
+
+  <div class="project-item" id="box-wlnss" data-project="wlnss">
+    <span class="item-number">001</span>
+    <span class="item-arrow">↗</span>
+    <h2 class="item-title">WLNSS</h2>
+    <p class="item-desc">On-Demand Healthcare / Co-Founder</p>
+  </div>
+
+  <div class="project-item" id="box-bath" data-project="bath">
+    <span class="item-number">002</span>
+    <span class="item-arrow">↗</span>
+    <h2 class="item-title">BATH</h2>
+    <p class="item-desc">Referral-Only Wellness / Founder</p>
+  </div>
+
+  <div class="project-item partnerships-box" id="box-partnerships">
+    <div class="partners-track" id="partners-track"></div>
+    <span class="item-number">004</span>
+    <span class="item-arrow">↗</span>
+    <h2 class="item-title">PARTNERSHIPS</h2>
+    <p class="item-desc">Trusted By The Best</p>
+  </div>
+
+  <div class="project-item community-box" id="box-community" data-project="community">
+    <div class="photo-track" id="photos-community"></div>
+    <span class="item-number">003</span>
+    <span class="item-arrow">↗</span>
+    <h2 class="item-title">COMMUNITY</h2>
+    <p class="item-desc">People I've Worked With</p>
+  </div>
+
+</div>
+
+<!-- CASE STUDY: WLNSS -->
+<div class="case-study-overlay" id="case-wlnss">
+  <div class="case-content">
+    <p class="case-label">WORK 001 / CO-FOUNDER</p>
+    <h1 class="case-title">WLNSS</h1>
+    <p class="case-tagline">On-Demand Healthcare</p>
+    <div class="case-block">
+      <p class="emphasis">I started WLNSS. An on-demand healthcare app.</p>
+    </div>
+    <div class="case-block">
+      <p>I wasn't just running it. I helped build the app, built the operations, the systems, and the brand from scratch.</p>
+      <p>User experience. Provider flow. Scheduling logic. Training frameworks. Nurse onboarding. All of it.</p>
+    </div>
+    <div class="case-block">
+      <p class="emphasis-alt">I hired, trained, and managed 250 nurses nationwide. My phone basically turned into an EMS dispatch line.</p>
+    </div>
+    <div class="case-block">
+      <p>I handled:</p>
+      <div class="inline-tags">
+        <span>Operations</span>
+        <span>Logistics</span>
+        <span>Branding</span>
+        <span>Marketing</span>
+        <span>Problem-solving</span>
+      </div>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <p>Working alongside my co-founders. Two healthcare investors at KKR & Co.</p>
+    </div>
+    <div class="case-block">
+      <p class="emphasis">WLNSS was simple at its core:<br>Healthcare that came to you.</p>
+    </div>
+    <div class="case-block">
+      <p>IVs, injections, wellness treatments, COVID testing, urgent support. Delivered by licensed nurses, on demand.</p>
+      <p>We scaled to nearly 10,000 users.</p>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <p>WLNSS taught me:</p>
+      <ul class="lessons">
+        <li>How to build a medical app and marketplace from scratch</li>
+        <li>How to manage clinical teams</li>
+        <li>How to run operations at scale</li>
+        <li>How to brand healthcare without making it look like a hospital brochure</li>
+        <li>How to fix problems before anyone realized they existed</li>
+      </ul>
+    </div>
+    <div class="case-closing">
+      <p>WLNSS was my real-world degree in building, scaling, and surviving a healthcare startup.</p>
+      <p class="sub">It was my unofficial MBA. Hands-on. Real world. No curve. No grace period.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDY: BATH -->
+<div class="case-study-overlay" id="case-bath">
+  <div class="case-content">
+    <p class="case-label">WORK 002 / FOUNDER</p>
+    <h1 class="case-title">BATH</h1>
+    <p class="case-tagline">Referral-Only Wellness Services</p>
+    <div class="case-block">
+      <p class="emphasis">I started BATH with one clear intention:</p>
+      <p>To take IV therapy out of the strip-mall setting and reimagine it as something private, elevated, and deeply personal.</p>
+    </div>
+    <div class="case-block">
+      <p>There was no PR agency. No marketing team. No influencer push.</p>
+      <p>Just relationships, discretion, and word of mouth.</p>
+    </div>
+    <div class="case-block">
+      <p class="emphasis-alt">Over time, that approach quietly positioned BATH within rooms occupied by some of the most influential people in entertainment, sports, business, and culture — not through promotion, but through trust.</p>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <p class="emphasis">BATH is referral-only by design.</p>
+      <p>If you know, you know. If you don't, you won't find billboards or splash pages. That's intentional.</p>
+    </div>
+    <div class="case-block">
+      <p>The individuals you may see associated with BATH are people I've collaborated with, built alongside, or created wellness environments around — not medical claims, simply professional relationships I value.</p>
+    </div>
+    <div class="case-block">
+      <p>Behind the scenes, I've partnered with exceptional medical professionals who share the same standards around safety, precision, and execution.</p>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <p class="emphasis">BATH grew because it was built carefully.</p>
+    </div>
+    <div class="case-block">
+      <p>I designed the systems. I shaped the experience. I developed the brand architecture.</p>
+      <p>What began as a small, focused operation evolved into a trusted resource for people who expect excellence, delivered quietly.</p>
+    </div>
+    <div class="case-closing">
+      <p>No noise. No theatrics.</p>
+      <p class="sub">Just precision, discretion, and care.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDY: PARTNERSHIPS -->
+<div class="case-study-overlay" id="case-partnerships">
+  <div class="case-content">
+    <p class="case-label">WORK 004 / PARTNERSHIPS</p>
+    <h1 class="case-title">PARTNERSHIPS</h1>
+    <p class="case-tagline">Trusted By The Best</p>
+    <div class="case-block">
+      <p class="emphasis">The companies you keep say everything.</p>
+    </div>
+    <div class="case-block">
+      <p>These aren't sponsorships or paid placements. These are relationships built through trust, access, and delivering an experience that the most discerning names in the world actually rely on.</p>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <div class="inline-tags">
+        <span>CAA</span>
+        <span>WME</span>
+        <span>Four Seasons</span>
+        <span>The Maybourne</span>
+        <span>The Madison Club</span>
+        <span>San Vicente Bungalows</span>
+        <span>The NBA</span>
+        <span>F1</span>
+      </div>
+    </div>
+    <div class="case-divider"></div>
+    <div class="case-block">
+      <p class="emphasis-alt">From the world's top talent agencies to the most exclusive hospitality in the world — these partnerships were earned, not bought.</p>
+    </div>
+    <div class="case-block">
+      <p>CAA and WME opened doors to the most influential talent on the planet. Four Seasons, The Maybourne, San Vicente Bungalows, and The Madison Club represent the pinnacle of where elite clientele live, stay, and gather. The NBA and F1 are the stages where culture and sport collide at the highest level.</p>
+      <p>BATH was there for all of it.</p>
+    </div>
+    <div class="case-closing">
+      <p>You don't get in these rooms by asking. You get in by being exactly what they need.</p>
+      <p class="sub">Quietly. Consistently. Without compromise.</p>
+      <br>
+      <p class="sub">What BATH Taught Me</p>
+      <p>Trust is built quietly in the details no one sees.</p>
+      <p>Referrals are reputation in motion — proof that consistency travels further than promotion.</p>
+      <p>Discretion is not a feature, it is infrastructure.</p>
+      <p>The smallest operational gap can cost the greatest amount of trust.</p>
+      <p>When people feel considered — not marketed to — they bring you into rooms you never asked to enter.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CASE STUDY: COMMUNITY -->
+<div class="case-study-overlay" id="case-community">
+  <div class="case-content">
+    <p class="case-label">WORK 003 / COMMUNITY</p>
+    <h1 class="case-title">COMMUNITY</h1>
+    <p class="case-tagline">People I've Worked With</p>
+    <div class="case-block">
+      <p>I've been fortunate to work alongside incredible people across entertainment, sports, business, and culture. These are some of the relationships and moments I value most.</p>
+    </div>
+    <div class="community-gallery" id="communityGrid">
+      <img class="gallery-img" src="photos/community-03.jpg" alt="">
+      <img class="gallery-img" src="photos/community-04.jpg" alt="">
+      <img class="gallery-img" src="photos/community-05.jpg" alt="">
+      <img class="gallery-img" src="photos/community-06.jpg" alt="">
+      <img class="gallery-img" src="photos/community-07.jpg" alt="">
+      <img class="gallery-img" src="photos/community-08.jpg" alt="">
+      <img class="gallery-img" src="photos/community-09.jpg" alt="">
+      <img class="gallery-img" src="photos/community-10.jpg" alt="">
+      <img class="gallery-img" src="photos/community-11.jpg" alt="">
+      <img class="gallery-img" src="photos/community-12.jpg" alt="">
+      <img class="gallery-img" src="photos/community-13.jpg" alt="">
+      <img class="gallery-img" src="photos/community-14.jpg" alt="">
+      <img class="gallery-img" src="photos/community-15.jpg" alt="">
+      <img class="gallery-img" src="photos/community-16.jpg" alt="">
+      <img class="gallery-img" src="photos/community-17.jpg" alt="">
+      <img class="gallery-img" src="photos/community-18.jpg" alt="">
+      <img class="gallery-img" src="photos/community-19.jpg" alt="">
+      <img class="gallery-img" src="photos/community-20.jpg" alt="">
+    </div>
+    <div class="case-closing">
+      <p>Not medical claims. Just relationships, trust, and moments that matter.</p>
+      <p class="sub">Built through word of mouth. Maintained through care.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕ &nbsp;CLOSE</button>
+  <button class="lightbox-nav prev" id="lightboxPrev">←</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav next" id="lightboxNext">→</button>
+  <span class="lightbox-count" id="lightboxCount"></span>
+</div>
+
+<!-- Back Button -->
+<button class="case-back" id="caseBack" onclick="closeCaseStudy()">
+  <span class="arrow-back">←</span>
+  <span>BACK</span>
+</button>
+
+<script>
+// ── Cursor ──
+const cursorDot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', (e) => {
+  cursorDot.style.left = e.clientX + 'px';
+  cursorDot.style.top  = e.clientY + 'px';
+});
+
+// ── WORK HARD trail ──
+const wrapper = document.getElementById('workWrapper');
+let lastCloneTime = 0;
+
+wrapper.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastCloneTime < 60) return;
+  lastCloneTime = now;
+  const clone = document.createElement('div');
+  clone.className = 'clone-text';
+  clone.textContent = 'WORK HARD';
+  clone.style.left = e.clientX + 'px';
+  clone.style.top  = e.clientY + 'px';
+  clone.style.transform = `translate(-50%,-50%) rotate(${(Math.random()-0.5)*20}deg)`;
+  document.body.appendChild(clone);
+  setTimeout(() => clone.remove(), 1200);
+});
+
+// ── Draggable boxes ──
+const boxes = document.querySelectorAll('.project-item');
+
+const boxConfigs = [
+  { x: 0.28, y: 0.18, w: 420, h: 300, z: 2 },   // WLNSS
+  { x: 0.38, y: 0.28, w: 400, h: 280, z: 1 },    // BATH
+  { x: 0.22, y: 0.32, w: 460, h: 320, z: 3 },    // PARTNERSHIPS
+  { x: 0.32, y: 0.20, w: 560, h: 400, z: 4 },    // COMMUNITY
+];
+
+function positionBoxes() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  boxes.forEach((box, i) => {
+    const cfg = boxConfigs[i];
+    if (!cfg) return;
+    const scale = Math.min(vw / 1440, 1);
+    const w = cfg.w * scale;
+    const h = cfg.h * scale;
+    box.style.width  = w + 'px';
+    box.style.height = h + 'px';
+    box.style.zIndex = cfg.z;
+    if (!box.dataset.dragged) {
+      box.style.left = (vw * cfg.x) + 'px';
+      box.style.top  = (vh * cfg.y) + 'px';
+      const rotations = [-4, 3, -2, 5];
+      box.style.setProperty('--init-rot', (rotations[i] || 0) + 'deg');
+      if (!box.classList.contains('dragged-once')) {
+        box.style.transform = `rotate(${rotations[i] || 0}deg)`;
+      }
+    }
+    setTimeout(() => box.classList.add('loaded'), 300 + i * 150);
+  });
+}
+
+positionBoxes();
+window.addEventListener('resize', positionBoxes);
+
+// ── Fade drag hint on first drag ──
+(function() {
+  const hint = document.getElementById('dragHint');
+  if (!hint) return;
+  document.querySelector('.work-wrapper')?.addEventListener('pointerdown', () => {
+    hint.classList.add('gone');
+  }, { once: true });
+})();
+
+
+boxes.forEach(box => {
+  let isDragging = false, wasDragged = false;
+  let startX, startY, origLeft, origTop;
+  let velX = 0, velY = 0, lastMoveX, lastMoveY, lastMoveTime, inertiaRAF;
+
+  box.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    isDragging = true; wasDragged = false;
+    const rect = box.getBoundingClientRect();
+    startX = e.clientX; startY = e.clientY;
+    origLeft = rect.left; origTop = rect.top;
+    lastMoveX = e.clientX; lastMoveY = e.clientY;
+    lastMoveTime = Date.now(); velX = 0; velY = 0;
+    if (inertiaRAF) cancelAnimationFrame(inertiaRAF);
+    boxes.forEach(b => b.style.zIndex = 1);
+    box.style.zIndex = 8;
+    box.classList.add('dragging');
+    box.classList.add('dragged-once');
+    box.style.transform = '';
+    box.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+
+  box.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) { wasDragged = true; box.dataset.dragged = '1'; }
+    box.style.left = (origLeft + dx) + 'px';
+    box.style.top  = (origTop  + dy) + 'px';
+    const now = Date.now(); const dt = now - lastMoveTime;
+    if (dt > 0) { velX = (e.clientX - lastMoveX) / dt * 16; velY = (e.clientY - lastMoveY) / dt * 16; }
+    lastMoveX = e.clientX; lastMoveY = e.clientY; lastMoveTime = now;
+  });
+
+  box.addEventListener('pointerup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    box.classList.remove('dragging');
+    box.releasePointerCapture(e.pointerId);
+    const friction = 0.92;
+    function inertiaStep() {
+      velX *= friction; velY *= friction;
+      if (Math.abs(velX) < 0.1 && Math.abs(velY) < 0.1) return;
+      let left = parseFloat(box.style.left) + velX;
+      let top  = parseFloat(box.style.top)  + velY;
+      const bw = box.offsetWidth, bh = box.offsetHeight;
+      const vw = window.innerWidth, vh = window.innerHeight;
+      if (left < -bw * 0.5) { left = -bw * 0.5; velX *= -0.3; }
+      if (left > vw - bw * 0.5) { left = vw - bw * 0.5; velX *= -0.3; }
+      if (top < -bh * 0.3)  { top  = -bh * 0.3;  velY *= -0.3; }
+      if (top > vh - bh * 0.5) { top = vh - bh * 0.5; velY *= -0.3; }
+      box.style.left = left + 'px'; box.style.top = top + 'px';
+      inertiaRAF = requestAnimationFrame(inertiaStep);
+    }
+    if (Math.abs(velX) > 0.5 || Math.abs(velY) > 0.5) inertiaRAF = requestAnimationFrame(inertiaStep);
+    if (!wasDragged) { const pid = box.dataset.project; if (pid) openCaseStudy(pid); }
+  });
+
+  box.addEventListener('pointercancel', (e) => {
+    isDragging = false; box.classList.remove('dragging');
+  });
+});
+
+// ── Box tilt on mousemove ──
+boxes.forEach(box => {
+  let tiltRAF = null;
+  let targetRX = 0, targetRY = 0, currentRX = 0, currentRY = 0;
+  let tilting = false;
+
+  function animateTilt() {
+    currentRX += (targetRX - currentRX) * 0.12;
+    currentRY += (targetRY - currentRY) * 0.12;
+    box.style.transform = `perspective(700px) rotateX(${currentRX}deg) rotateY(${currentRY}deg) scale(1.02)`;
+    if (tilting || Math.abs(targetRX - currentRX) > 0.01 || Math.abs(targetRY - currentRY) > 0.01) {
+      tiltRAF = requestAnimationFrame(animateTilt);
+    } else {
+      box.style.transform = '';
+      tiltRAF = null;
+    }
+  }
+
+  box.addEventListener('mouseenter', () => {
+    tilting = true;
+    if (!tiltRAF) tiltRAF = requestAnimationFrame(animateTilt);
+  });
+
+  box.addEventListener('mousemove', (e) => {
+    if (box.classList.contains('dragging')) return;
+    const rect = box.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+    const ny = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+    targetRY =  nx * 7;
+    targetRX = -ny * 5;
+  });
+
+  box.addEventListener('mouseleave', () => {
+    tilting = false;
+    targetRX = 0;
+    targetRY = 0;
+    if (!tiltRAF) tiltRAF = requestAnimationFrame(animateTilt);
+  });
+});
+
+// ── Case Study ──
+let currentOverlay = null;
+
+function openCaseStudy(id) {
+  const overlay = document.getElementById('case-' + id);
+  if (!overlay) return;
+  currentOverlay = overlay;
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.getElementById('caseBack').classList.add('visible');
+  setTimeout(() => {
+    observeCaseBlocks(overlay);
+    wireGalleryLightbox(overlay);
+  }, 120);
+}
+
+function closeCaseStudy() {
+  if (!currentOverlay) return;
+  currentOverlay.classList.remove('open');
+  document.getElementById('caseBack').classList.remove('visible');
+  setTimeout(() => {
+    if (currentOverlay) {
+      currentOverlay.querySelectorAll('.case-block,.case-divider,.case-closing').forEach(el => el.classList.remove('visible'));
+      currentOverlay.querySelectorAll('.gallery-img').forEach(img => img.classList.remove('visible'));
+    }
+    currentOverlay = null;
+  }, 650);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeCaseStudy();
+});
+
+// ── Scroll observers ──
+function observeCaseBlocks(overlay) {
+  const blocks = overlay.querySelectorAll('.case-block,.case-divider,.case-closing');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); } });
+  }, { root: overlay, threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  blocks.forEach(b => obs.observe(b));
+
+  const imgs = overlay.querySelectorAll('.gallery-img');
+  if (!imgs.length) return;
+  const iobs = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const idx = Array.from(imgs).indexOf(en.target);
+        setTimeout(() => en.target.classList.add('visible'), (idx % 6) * 80);
+        iobs.unobserve(en.target);
+      }
+    });
+  }, { root: overlay, threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  imgs.forEach(img => iobs.observe(img));
+}
+
+// ── Gallery lightbox wiring ──
+function wireGalleryLightbox(overlay) {
+  const imgs = Array.from(overlay.querySelectorAll('.gallery-img'));
+  const srcs = imgs.map(img => img.src);
+  imgs.forEach((img, i) => {
+    img.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(srcs, i); });
+  });
+}
+
+// ── Lightbox ──
+const lightbox    = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCount = document.getElementById('lightboxCount');
+let lbImages = [], lbIndex = 0;
+
+function openLightbox(imgs, startIndex) {
+  lbImages = imgs; lbIndex = startIndex;
+  showLightboxImage();
+  lightbox.classList.add('open');
+}
+
+function closeLightbox() { lightbox.classList.remove('open'); }
+
+function showLightboxImage() {
+  lightboxImg.src = lbImages[lbIndex];
+  lightboxCount.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+}
+
+function lightboxStep(dir) {
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  lightboxImg.style.opacity = '0';
+  setTimeout(() => { showLightboxImage(); lightboxImg.style.opacity = '1'; }, 180);
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxNext').addEventListener('click', () => lightboxStep(1));
+document.getElementById('lightboxPrev').addEventListener('click', () => lightboxStep(-1));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lightboxStep(1);
+  if (e.key === 'ArrowLeft')  lightboxStep(-1);
+  if (e.key === 'Escape')     closeLightbox();
+});
+
+// ── Nav active state ──
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (link.getAttribute('href') === '#') e.preventDefault();
+    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+// ── Floating partner name tags ──
+const partnerNames = ['CAA','FOUR SEASONS','THE MAYBOURNE','WME','THE MADISON CLUB','SAN VICENTE BUNGALOWS','THE NBA','F1'];
+
+class FloatingName {
+  constructor(el, container) {
+    this.el = el; this.container = container;
+    const rect = container.getBoundingClientRect();
+    this.cw = rect.width; this.ch = rect.height;
+    const elRect = el.getBoundingClientRect();
+    this.w = Math.max(elRect.width, 80); this.h = Math.max(elRect.height, 24);
+    this.x = Math.random() * Math.max(1, this.cw - this.w);
+    this.y = Math.random() * Math.max(1, this.ch - this.h);
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 0.1 + Math.random() * 0.18;
+    this.vx = Math.cos(angle) * speed; this.vy = Math.sin(angle) * speed;
+    this.update();
+  }
+  step() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x <= 0 || this.x >= this.cw - this.w) { this.vx *= -1; this.x = Math.max(0, Math.min(this.x, this.cw - this.w)); }
+    if (this.y <= 0 || this.y >= this.ch - this.h) { this.vy *= -1; this.y = Math.max(0, Math.min(this.y, this.ch - this.h)); }
+    this.update();
+  }
+  update() { this.el.style.transform = `translate(${this.x}px,${this.y}px)`; }
+  resize() {
+    const rect = this.container.getBoundingClientRect();
+    this.cw = rect.width; this.ch = rect.height;
+    this.x = Math.min(this.x, this.cw - this.w);
+    this.y = Math.min(this.y, this.ch - this.h);
+  }
+}
+
+function initPartnerTrack() {
+  const track = document.getElementById('partners-track');
+  if (!track) return [];
+  return partnerNames.map((name, i) => {
+    const el = document.createElement('span');
+    el.className = 'partner-float';
+    el.textContent = name;
+    el.style.opacity = '0';
+    track.appendChild(el);
+    // Wait a tick so browser can measure width
+    const f = { _el: el, _track: track, _floater: null };
+    setTimeout(() => {
+      f._floater = new FloatingName(el, track);
+      setTimeout(() => { el.style.opacity = ''; }, 400 + i * 80);
+    }, 50);
+    return f;
+  });
+}
+
+const partnerFloaters = initPartnerTrack();
+
+function animatePartners() {
+  partnerFloaters.forEach(f => { if (f._floater) f._floater.step(); });
+  requestAnimationFrame(animatePartners);
+}
+animatePartners();
+window.addEventListener('resize', () => partnerFloaters.forEach(f => { if (f._floater) f._floater.resize(); }));
+
+// ── Floating photos in community box ──
+const communityPhotos = [
+  'photos/community-03.jpg','photos/community-04.jpg',
+  'photos/community-05.jpg','photos/community-06.jpg','photos/community-07.jpg',
+  'photos/community-08.jpg','photos/community-09.jpg','photos/community-10.jpg',
+  'photos/community-11.jpg','photos/community-12.jpg','photos/community-13.jpg',
+  'photos/community-14.jpg','photos/community-15.jpg','photos/community-16.jpg',
+  'photos/community-17.jpg','photos/community-18.jpg','photos/community-19.jpg',
+  'photos/community-20.jpg',
+];
+
+class FloatingPhoto {
+  constructor(img, container) {
+    this.el = img; this.container = container;
+    const rect = container.getBoundingClientRect();
+    this.cw = rect.width; this.ch = rect.height;
+    const size = 80 + Math.random() * 55;
+    this.el.style.width = size + 'px'; this.el.style.height = size + 'px';
+    this.x = Math.random() * (this.cw - size);
+    this.y = Math.random() * (this.ch - size);
+    this.size = size;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 0.12 + Math.random() * 0.2;
+    this.vx = Math.cos(angle) * speed; this.vy = Math.sin(angle) * speed;
+    this.rotation = (Math.random() - 0.5) * 12;
+    this.rotSpeed = (Math.random() - 0.5) * 0.05;
+    this.update();
+  }
+  step() {
+    this.x += this.vx; this.y += this.vy; this.rotation += this.rotSpeed;
+    if (this.x <= 0 || this.x >= this.cw - this.size) { this.vx *= -1; this.x = Math.max(0, Math.min(this.x, this.cw - this.size)); }
+    if (this.y <= 0 || this.y >= this.ch - this.size) { this.vy *= -1; this.y = Math.max(0, Math.min(this.y, this.ch - this.size)); }
+    this.update();
+  }
+  update() { this.el.style.transform = `translate(${this.x}px,${this.y}px) rotate(${this.rotation}deg)`; }
+  resize() {
+    const rect = this.container.getBoundingClientRect();
+    this.cw = rect.width; this.ch = rect.height;
+    this.x = Math.min(this.x, this.cw - this.size);
+    this.y = Math.min(this.y, this.ch - this.size);
+  }
+}
+
+function initPhotoTrack(trackId, photoList) {
+  const track = document.getElementById(trackId);
+  if (!track || !photoList.length) return [];
+  return photoList.map((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'photo-float'; img.src = src; img.alt = ''; img.draggable = false;
+    img.style.opacity = '0';
+    track.appendChild(img);
+    const f = new FloatingPhoto(img, track);
+    setTimeout(() => { img.style.opacity = ''; }, 500 + i * 100);
+    return f;
+  });
+}
+
+const allFloaters = initPhotoTrack('photos-community', communityPhotos);
+
+function animatePhotos() { allFloaters.forEach(f => f.step()); requestAnimationFrame(animatePhotos); }
+if (allFloaters.length) animatePhotos();
+window.addEventListener('resize', () => allFloaters.forEach(f => f.resize()));
+</script>
+</body>
+</html>
